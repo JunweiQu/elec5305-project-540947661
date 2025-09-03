@@ -1,4 +1,4 @@
-# Timbre Transfer via Traditional DSP (Route B) — ELEC5305 Project Proposal
+# Timbre Transfer via Traditional DSP — ELEC5305 Project Proposal
 
 **Goal**  
 Change the *timbre* of a **monophonic** input to **piano / violin / erhu** while preserving melody (F0), rhythm and loudness contour.

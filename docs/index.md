@@ -14,4 +14,4 @@ This project changes the *timbre* of a **monophonic** input to **piano / violin 
 See the README for APA-style references.
 
 ---
-GitHub repo: <https://github.com/yourname/elec5305-timbre-transfer>
+**GitHub repo:** <https://github.com/JunweiQu/5305lab>  

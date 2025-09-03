@@ -24,9 +24,3 @@ Kim, J. W., Salamon, J., Li, P., & Bello, J. P. (2018). CREPE: A convolutional r
 ITU-R. (2015). *BS.1534-3: Method for the subjective assessment of intermediate quality level of audio systems (MUSHRA)*.  
 Magenta Team. (2017). NSynth dataset (CC BY 4.0).  
 Li, B., Liu, X., Dinesh, K., Duan, Z., & Sharma, G. (2019). URMP dataset paper. *IEEE Transactions on Multimedia, 21*(2), 522–535.
-
-**Milestones**  
-W1: templates & repository  
-W2: analysis module draft  
-W3: mapping + synthesis design & objective metrics script  
-W4: pilot examples & listening form; iterate based on teaching-staff feedback

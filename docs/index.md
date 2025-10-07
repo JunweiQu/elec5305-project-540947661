@@ -3,7 +3,7 @@ title: ELEC5305 Project Proposal — Timbre Transfer
 ---
 
 **Status:** initial implementation & testing.  
-**Repo:** <https://github.com/JunweiQu/5305lab>
+**Repo:** <https://github.com/JunweiQu/elec5305-project-540947661>
 
 ## Summary
 We target **timbre transfer** for **monophonic** inputs to **piano/violin/erhu**, preserving melody (F0), rhythm, and loudness contour. The Route‑B DSP pipeline: F0 (pYIN/CREPE) → STFT + spectral envelope (cepstral/LPC; WORLD/CheapTrick) → SMS/HNM (harmonic–noise) → F0‑conditioned envelope replacement → iSTFT/OLA (+ optional PSOLA).

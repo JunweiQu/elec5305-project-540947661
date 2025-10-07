@@ -1,8 +1,8 @@
 # Timbre Transfer via Traditional DSP 
 
 **Project status:** proposal stage, initial implementation & testing 
-**Project site:** https://junweiqu.github.io/5305lab/  
-**Repository:** https://github.com/JunweiQu/5305lab
+**Project site:** https://junweiqu.github.io/elec5305-project-540947661/  
+**Repository:** https://github.com/JunweiQu/elec5305-project-540947661
 
 ## Overview
 We change the **timbre** of a **monophonic** input to **piano, violin, or erhu** while preserving melody (F0), rhythm, and loudness contour. The focus is an **interpretable DSP pipeline** ): F0 tracking (pYIN/CREPE), STFT-based spectral envelope estimation (cepstral/LPC; WORLD/CheapTrick as reference), harmonic–noise decomposition (SMS/HNM), F0‑conditioned envelope replacement, and iSTFT/OLA resynthesis with optional PSOLA.

@@ -23,3 +23,7 @@ We target **timbre transfer** for **monophonic** inputs to **piano/violin/erhu**
 
 ## References
 (See repo README for full APA list.)
+
+## Audio demos
+<p><b>WORLD re-synthesis</b></p>
+<audio controls src="audio/recon_world.wav"></audio>

@@ -2,16 +2,24 @@
 title: ELEC5305 Project Proposal — Timbre Transfer 
 ---
 
-## Summary 
-This project changes the *timbre* of a **monophonic** input to **piano / violin / erhu** while preserving melody (F0), rhythm and loudness contour. It adopts an interpretable DSP pipeline: F0 tracking (pYIN/CREPE), STFT-based spectral envelope estimation (cepstral/LPC; WORLD/CheapTrick as reference), harmonic–noise (SMS/HNM) decomposition, F0-conditioned envelope replacement, and iSTFT/OLA resynthesis with optional PSOLA.
+**Status:** initial implementation & testing.  
+**Repo:** <https://github.com/JunweiQu/5305lab>
 
-## Evaluation 
-- Objective: F0 RMSE, Log-Spectral Distance (LSD) / MFCC distance  
-- Subjective: ABX / MUSHRA (ITU-R BS.1534-3)  
-- Visuals: mel-spectrograms, F0/loudness curves
+## Summary
+We target **timbre transfer** for **monophonic** inputs to **piano/violin/erhu**, preserving melody (F0), rhythm, and loudness contour. The Route‑B DSP pipeline: F0 (pYIN/CREPE) → STFT + spectral envelope (cepstral/LPC; WORLD/CheapTrick) → SMS/HNM (harmonic–noise) → F0‑conditioned envelope replacement → iSTFT/OLA (+ optional PSOLA).
+
+## Baseline code & datasets
+- `librosa.pyin`, **CREPE**, **LPC/cepstral envelope**, optional **pyworld**; exploratory **DDSP** baseline.  
+- **NSynth** for envelope templates; **URMP** for isolated strings; small erhu set to be curated (permissive license).
+
+## Week 9 checklist
+- Literature review ✓; dataset shortlist ✓; baseline code setup ✓  
+- First demo & metrics → in progress; listening form → in progress
+
+## Feedback we seek
+- Are the datasets sufficient for piano/violin/erhu coverage?  
+- Which envelope estimator (LPC vs. cepstral vs. CheapTrick) would you prefer as primary?  
+- Is the DDSP baseline comparison adequate for the scope of ELEC5305?
 
 ## References
-See the README for APA-style references.
-
----
-**GitHub repo:** <https://github.com/JunweiQu/5305lab>  
+(See repo README for full APA list.)

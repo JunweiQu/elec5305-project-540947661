@@ -21,3 +21,7 @@ build/
 # Audio datasets (not shipped)
 assets/iowa_raw/
 assets/iowa_wav/
+assets/perc_raw/
+assets/perc_wav/
+assets/piano_raw/
+assets/piano_wav/

@@ -321,3 +321,28 @@ Possible extensions include:
 - **WORLD vocoder** – M. Morise et al., “WORLD: A Vocoder-Based High-Quality Speech Synthesis System”, IEICE Transactions on Information and Systems, 2016.  
 - **Musical Instrument Samples (MIS)** – University of Iowa Electronic Music Studios, for making the single-note datasets publicly available.  
 - **ELEC5305 teaching staff**, especially Craig Jin, for feedback on the proposal, research question and report structure.
+
+## Offline GUI executable
+
+For quick demonstration, we provide a pre-built Windows executable.
+
+- **Download**:  
+  Download `OfflineTimbreTransfer_Windows.exe` from the [`bin` folder](./bin/OfflineTimbreTransfer_Windows.exe) in this repository.
+
+- **System requirements**:
+  - Windows 10/11, 64-bit
+  - No Python installation is required.
+
+- **How to use**:
+  1. Double-click `OfflineTimbreTransfer_Windows.exe`.
+  2. Click **Browse...** and select a mono WAV file (e.g. `assets/piano_canon.wav`).
+  3. Choose a target timbre:
+     - Violin
+     - Piano
+     - Drum / Percussion
+  4. Click **Run conversion**.
+  5. The converted WAV files will be written to the `reports/audio` folder
+     inside the same directory as the executable.
+
+> On first run, Windows SmartScreen may show a warning because this is not a
+> signed application. Click “More info” → “Run anyway” to continue.

@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Build / packaging
+dist/
+build/
+*.spec
+
+# IDE
+.vscode/
+.idea/
+
+# Audio datasets (not shipped)
+assets/iowa_raw/
+assets/iowa_wav/

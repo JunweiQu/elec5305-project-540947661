@@ -1,35 +1,90 @@
-# Timbre Transfer via Traditional DSP 
+# Offline Timbre Transfer with WORLD & Iowa Single-Note Banks
 
-**Project status:** proposal stage, initial implementation & testing 
-**Project site:** https://junweiqu.github.io/elec5305-project-540947661/  
-**Repository:** https://github.com/JunweiQu/elec5305-project-540947661
+ELEC5305 Project – Junwei Qu (SID 540947661)  
+School of Electrical and Information Engineering, The University of Sydney
 
-## Overview
-We change the **timbre** of a **monophonic** input to **piano, violin, or erhu** while preserving melody (F0), rhythm, and loudness contour. The focus is an **interpretable DSP pipeline** ): F0 tracking (pYIN/CREPE), STFT-based spectral envelope estimation (cepstral/LPC; WORLD/CheapTrick as reference), harmonic–noise decomposition (SMS/HNM), F0‑conditioned envelope replacement, and iSTFT/OLA resynthesis with optional PSOLA.
+This repository contains my final ELEC5305 project: an **offline timbre transfer tool** for musical audio.  
+Given a monophonic WAV file (e.g. a piano recording), the system analyses the signal using the **WORLD vocoder**, then re-synthesises it so that it sounds like being played by a different instrument.
 
-## Baselines & Data
-- **Baselines (code to start with):** `librosa.pyin`, **CREPE** (pretrained), **LPC/cepstral envelope**, optional **pyworld**.  
-- **Exploratory track (requested by teaching staff):** try **DDSP** timbre-transfer baseline for comparison.  
-- **Datasets:** **NSynth** (single notes) for envelope templates; **URMP** isolated strings for analysis/validation; curate small erhu sample set (public-domain or permissive license).
+The current prototype supports three target timbres:
 
-## Week 9 progress (checklist)
-- [x] Literature review (Route B: WORLD/CheapTrick, SMS/HNM; Route C: DDSP)
-- [x] Dataset shortlist (NSynth/URMP; erhu samples to be curated)
-- [x] Baseline code setup: pYIN & CREPE working on test clips; STFT + cepstral envelope extraction
-- [ ] First envelope-replacement demo (10–20 s) and LSD/MFCC metrics
-- [ ] Add ABX/MUSHRA listening form and pilot participants
+- 🎻 Violin (bowed strings)  
+- 🎹 Piano  
+- 🥁 Drum / percussion
 
-## Next steps (Weeks 10–11)
-- Implement harmonic–noise split and per-branch smoothing; compare LPC vs. cepstral vs. CheapTrick
-- Run objective metrics (F0 RMSE, LSD/MFCC); collect ABX/MUSHRA ratings
-- Prepare audio demos for **piano/violin/erhu** and finalize plots
+Timbre statistics are learned from **single-note recordings** in the University of Iowa MIS instrument database, and stored in compact spectral “banks”. The project includes both:
 
-## References (APA 7)
-Morise, M., Yokomori, F., & Ozawa, K. (2016). WORLD: A vocoder-based high-quality speech synthesis system for real-time applications. *IEICE Transactions on Information and Systems, E99-D*(7), 1877–1884. https://doi.org/10.1587/transinf.2015EDP7457  
-Morise, M. (2015). CheapTrick: A spectral envelope estimator for high-quality speech synthesis. *Speech Communication, 67*, 1–7. https://doi.org/10.1016/j.specom.2014.09.003  
-Serra, X., & Smith, J. O. (1990). Spectral modeling synthesis: Deterministic plus stochastic decomposition. *Computer Music Journal, 14*(4), 12–24.  
-Mauch, M., & Dixon, S. (2014). pYIN: A fundamental frequency estimator using probabilistic threshold distributions. In *ICASSP 2014*, 659–663. https://doi.org/10.1109/ICASSP.2014.6853678  
-Kim, J. W., Salamon, J., Li, P., & Bello, J. P. (2018). CREPE: A convolutional representation for pitch estimation. In *ICASSP 2018*, 161–165.  
-Engel, J., Hantrakul, L., Gu, C., & Roberts, A. (2020). DDSP: Differentiable digital signal processing. In *ICLR 2020*.  
-Li, B., Liu, X., Dinesh, K., Duan, Z., & Sharma, G. (2019). Creating a multitrack classical music performance dataset for multimodal music analysis. *IEEE Transactions on Multimedia, 21*(2), 522–535. https://doi.org/10.1109/TMM.2018.2856090  
-Magenta Team. (2017). NSynth dataset (CC BY 4.0). https://magenta.withgoogle.com/datasets/nsynth
+- a **research command-line interface** (CLI) that exposes all intermediate steps, and  
+- a simple **offline GUI application** (Tkinter, packaged as a Windows `.exe` on my local machine).
+
+---
+
+## 1. Research Question & Motivation
+
+> **Research question:**  
+> Can a classical vocoder-based pipeline (WORLD analysis–synthesis + single-note spectral banks) perform practical **instrument timbre transfer** on real music recordings, while preserving melody and timing?
+
+Modern neural style-transfer methods require large training datasets and GPU resources.  
+Here I explore a complementary, **light-weight signal-processing approach** that can run fully offline on a laptop, reusing an existing source recording and a small single-note sample set.
+
+The tool is intended for **exploration and education** rather than commercial music production. It allows students to:
+
+- Listen to how **spectral envelope** and **aperiodicity** affect perceived timbre;
+- Compare the original WORLD reconstruction (`recon_world.wav`) with timbre-transferred versions (`demo_violin.wav`, `demo_piano.wav`, `demo_drum.wav`);
+- Inspect simple quantitative metrics for spectral change.
+
+---
+
+## 2. Repository Structure
+
+The most important files and directories are:
+
+```text
+elec5305-project-540947661/
+├─ assets/                 # Input audio & raw single-note datasets (not fully tracked in git)
+│  ├─ piano_canon.wav      # Example input melody used in the experiments
+│  ├─ iowa_raw/            # Raw violin AIF files from Iowa MIS (git-ignored)
+│  ├─ iowa_wav/            # Preprocessed violin WAVs (generated)
+│  ├─ piano_raw/           # Raw piano AIF files (git-ignored)
+│  ├─ piano_wav/           # Preprocessed piano WAVs (generated)
+│  ├─ perc_raw/            # Raw hand-percussion AIF files (git-ignored)
+│  └─ perc_wav/            # Preprocessed percussion WAVs (generated)
+│
+├─ docs/
+│  ├─ audio/               # Example audio for the project website
+│  └─ index.md             # Project web page (GitHub Pages)
+│
+├─ reports/
+│  └─ audio/
+│     ├─ recon_world.wav   # WORLD reconstruction of the input (baseline)
+│     ├─ demo_violin.wav   # Timbre-transferred output: violin
+│     ├─ demo_piano.wav    # Timbre-transferred output: piano
+│     └─ demo_drum.wav     # Timbre-transferred output: drum / percussion
+│
+├─ src/
+│  ├─ baseline_world.py    # Core WORLD analysis–synthesis and timbre transfer logic
+│  ├─ prepare_input.py     # Down-mix, resample and normalise arbitrary input WAVs
+│  ├─ make_test_input.py   # Optional: generate synthetic test tones / melodies
+│  │
+│  ├─ prepare_iowa_violin.py  # Convert Iowa violin AIF files -> normalised WAVs
+│  ├─ prepare_iowa_piano.py   # Convert Iowa piano AIF files -> normalised WAVs
+│  ├─ prepare_iowa_perc.py    # Convert Iowa percussion AIF files -> normalised WAVs
+│  │
+│  ├─ build_violin_bank.py # Build spectral envelope bank for violin
+│  ├─ build_piano_bank.py  # Build spectral envelope bank for piano
+│  ├─ build_perc_bank.py   # Build spectral envelope bank for percussion
+│  │
+│  ├─ timbre_app_cli.py    # Research CLI application (main entry point)
+│  ├─ timbre_app_gui.py    # Tkinter GUI used for the offline .exe
+│  ├─ timbre_app_simple.py # Minimal prototype used in early debugging
+│  │
+│  ├─ check_levels.py      # Sanity check: sample rate and peak / mean levels
+│  └─ metrics_quick.py     # Simple spectral-change metrics for evaluation
+│
+├─ templates/
+│  ├─ violin_bank.npz      # Learned violin spectral bank (generated)
+│  ├─ piano_bank.npz       # Learned piano spectral bank (generated)
+│  └─ perc_bank.npz        # Learned percussion spectral bank (generated)
+│
+├─ requirements.txt
+└─ README.md

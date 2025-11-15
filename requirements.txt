@@ -1,0 +1,5 @@
+numpy
+scipy
+soundfile
+pyworld
+matplotlib   # 如果 metrics_quick 里有画图就写上，没有可以删掉

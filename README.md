@@ -324,25 +324,30 @@ Possible extensions include:
 
 ## Offline GUI executable
 
-For quick demonstration, we provide a pre-built Windows executable.
+For convenient demonstration, we provide a pre-built **Windows GUI executable**.
 
 - **Download**:  
-  Download `OfflineTimbreTransfer_Windows.exe` from the [`bin` folder](./bin/OfflineTimbreTransfer_Windows.exe) in this repository.
+  Go to the [Releases page](https://github.com/JunweiQu/elec5305-project-540947661/releases)
+  and download the file  
+  `OfflineTimbreTransfer_Windows.exe` from the latest release.
+
+  > Alternatively, you can use the direct link from the release page (right-click the
+  > asset → “Copy link”), and paste it here if you want a one-click download.
 
 - **System requirements**:
   - Windows 10/11, 64-bit
-  - No Python installation is required.
+  - No Python or additional libraries are required.
 
 - **How to use**:
   1. Double-click `OfflineTimbreTransfer_Windows.exe`.
-  2. Click **Browse...** and select a mono WAV file (e.g. `assets/piano_canon.wav`).
+  2. Click **“Browse...”** and select a mono WAV file (e.g. `assets/piano_canon.wav`).
   3. Choose a target timbre:
      - Violin
      - Piano
      - Drum / Percussion
-  4. Click **Run conversion**.
+  4. Click **“Run conversion”**.
   5. The converted WAV files will be written to the `reports/audio` folder
-     inside the same directory as the executable.
+     in the same directory as the executable.
 
-> On first run, Windows SmartScreen may show a warning because this is not a
-> signed application. Click “More info” → “Run anyway” to continue.
+> On first run, Windows SmartScreen may show a warning because the executable is not
+> digitally signed. Click “More info” → “Run anyway” to continue.
